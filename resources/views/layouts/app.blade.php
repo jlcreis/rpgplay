@@ -32,26 +32,25 @@
 			<div class="collapse navbar-collapse" id="navbarMenu">
 				<!-- Menu -->
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Partidas</a>
+						<a class="nav-link" href="{{ route('partidas') }}">Partidas</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Personagens</a>
+						<a class="nav-link" href="{{ route('personagens') }}">Personagens</a>
 					</li>
 				</ul>
 				<!-- Autenticação do usuário -->
-				@guest
-				<a class="nav-link" href="{{ route('login') }}">Login</a>
-				<a class="nav-link" href="{{ route('register') }}">Novo Usuário</a>
-                @else
+				
+                @auth
 				<div class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->nome }} <span class="caret"></span>
                     </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="{{ Auth::user()->id == 1 ? route('jogadores', Auth::user()->id): route('jogador', Auth::user()->id)}}">Configurar</a>
 						<a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Sair
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -60,7 +59,7 @@
                         </a>
 					</div>
 				</div>
-				@endguest
+				@endauth
 			</div>
 		</nav>
 		@yield('content')
@@ -72,6 +71,7 @@
 	<script type="text/javascript" src="{{ asset('jquery/jquery.mask.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('jquery/jquery-ui.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
 	@yield('post-script')
 </body>
 

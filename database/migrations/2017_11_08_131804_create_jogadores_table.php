@@ -17,6 +17,7 @@ class CreateJogadoresTable extends Migration
             $table->increments('id');
             $table->integer('id_usuario')->unsigned();
             $table->string('avatar');
+            $table->date('dt_nascimento');
             $table->timestamps();
 
             $table->foreign('id_usuario')->references('id')->on('users');

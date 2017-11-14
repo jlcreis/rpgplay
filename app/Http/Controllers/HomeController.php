@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Jogador;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $jogador = \App\Jogador::where('id_usuario','=',Auth::user()->id)->get();
+        if($jogador->isEmpty()){
+            return view('jogador.novo');
+        }
         return view('home');
     }
 }
