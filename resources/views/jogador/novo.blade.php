@@ -30,7 +30,7 @@
 
                             <div class="col-md-12">
                                 <input id="avatar" type="file" class="form-control-file" name="avatar" value="{{ old('avatar') }}" required autofocus>
-                                <small id="fileHelp" class="form-text text-muted">Coloque uma imagem para seu seu avatar.</small>
+                                <small id="fileHelp" class="form-text text-muted">Coloque uma imagem para seu avatar.</small>
                                 @if ($errors->has('avatar'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('avatar') }}</strong>

@@ -35,8 +35,7 @@ class JogadorController extends Controller
     {       
         $validator = Validator::make($request->all(), $jogador->rules, $jogador->mensagens_error);
         if($validator->fails()){
-            
-            return redirect()->back()->withErrors($validator)->withInput()->with('msg','teste');
+            return redirect()->back()->withErrors($validator)->withInput();
         }
         $avatar = $this->moveAvatar($request->avatar);
         $jogador = new Jogador();

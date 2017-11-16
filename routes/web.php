@@ -34,4 +34,11 @@ Route::group(['prefix' => 'partidas'], function () {
 
 Route::group(['prefix' => 'personagens'], function () {
     Route::get('/', 'PersonagemController@index')->name('personagens');
+    Route::get('/novo', 'PersonagemController@create')->name('criarPersonagem');
+    Route::post('/gravar', 'PersonagemController@store')->name('gravarPersonagem');
+    Route::get('/{id}/edit', 'PersonagemController@edit')->name('editarPersonagem');
+    Route::get('/{vatar}/editAvatar', 'PersonagemController@editAvatar')->name('editarAvatarPersonagem');
+    Route::post('/{id}/update', 'PersonagemController@update')->name('atualizarPersonagem');
+    Route::post('/{avatar}/updateAvatar', 'PersonagemController@updateAvatar')->name('atualizarAvatarPersonagem');
+    Route::delete('personagem/{id}', 'PersonagemController@destroy')->name('deletarPersonagem');
 });

@@ -1,0 +1,13 @@
+.imgPersonagem {
+    max-width:200px;
+    height:250px;
+    width: auto;
+    margin: 0 auto;
+}
+.btn-align-right{
+    float:right;
+}
+
+.textSmall{
+    font-size: 12px;
+}
