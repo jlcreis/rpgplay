@@ -24,6 +24,7 @@ class CreatePersonagensPartidaTable extends Migration
             $table->integer('pontos_sabedoria');
             $table->integer('pontos_carisma');
             $table->integer('pontos_vida');
+            $table->integer('tipo_personagem');
 
             $table->foreign('id_partida')->references('id')->on('partidas');
             $table->foreign('id_personagem')->references('id')->on('personagens');

@@ -31,4 +31,15 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Jogador','id_usuario');
     }
+
+    public function partida()
+    {
+        return $this->hasOne('App\Partida','id_usuario');
+
+    }
+
+    public function convite()
+    {
+        return $this->hasOne('App\Convite','id_usuario');
+    }
 }

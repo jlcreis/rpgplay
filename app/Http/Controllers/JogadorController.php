@@ -183,4 +183,16 @@ class JogadorController extends Controller
     {
         unlink("img/jogador/".$fileName);
     }
+
+    /**
+     * Pesquisa jogador autocomplete
+     * 
+     */
+    public function listaJogadores(Request $request)
+    {
+        $term = $request->term;
+        $jogador = \App\User::select('nome as label','id as value')->where('nome','like','%'.$term.'%')->get();
+
+        return response()->json($jogador);
+    }
 }

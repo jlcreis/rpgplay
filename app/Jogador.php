@@ -34,4 +34,5 @@ class Jogador extends Model
     {
         return $this->hasOne('App\Personagem','id_jogador');
     }
+
 }

@@ -30,6 +30,14 @@ Route::group(['prefix' => 'jogadores'], function () {
 Route::group(['prefix' => 'partidas'], function () {
     Route::get('/', 'PartidaController@index')->name('partidas');
     Route::get('/create', 'PartidaController@create')->name('criarPartida');
+    Route::post('/gravar', 'PartidaController@store')->name('gravarPartida');
+    Route::get('/pesquisa_jogador', 'JogadorController@listaJogadores')->name('listaJogadores');
+    Route::get('/{id}/configuração','PartidaController@show')->name('configurarPartida');
+    Route::get('/{id_partida}/aceitar_convite','PartidaController@aceitarConvite')->name('aceitarConvite');
+    Route::get('/{id_partida}/personagemSecundario','PartidaController@personagemSecundario')->name('personagemSecundario');
+    Route::get('/{id_partida}/recusar_convite','PartidaController@recusarConvite')->name('recusarConvite');
+    Route::get('/[{id_personagem},{id_partida}]/importar', 'PartidaController@importarPersonagem')->name('importarPersonagem');
+    Route::delete('personagemSecundario/{id}', 'PartidaController@deletarPersonagemPartida')->name('deletarPersonagemSecundario');
 });
 
 Route::group(['prefix' => 'personagens'], function () {
@@ -41,4 +49,8 @@ Route::group(['prefix' => 'personagens'], function () {
     Route::post('/{id}/update', 'PersonagemController@update')->name('atualizarPersonagem');
     Route::post('/{avatar}/updateAvatar', 'PersonagemController@updateAvatar')->name('atualizarAvatarPersonagem');
     Route::delete('personagem/{id}', 'PersonagemController@destroy')->name('deletarPersonagem');
+});
+
+Route::group(['prefix' => 'jogar'], function () {
+    Route::get('/{id_partida}', 'JogarController@index')->name('jogar');
 });

@@ -52,9 +52,11 @@
                 <div class="card-block">
                     <h4 class="card-title">Avisos</h4>
                     <ul>
-                        <li>Exemplo de aviso 01</li>
-                        <li>Exemplo de aviso 02</li>
-                        <li>Exemplo de aviso 03</li>
+                        @if($convites)
+                            @foreach($convites as $convite)
+                                <li><a href="{{ route('configurarPartida', $convite->id_partida) }}">Você foi convidado por {{ $convite->convite_partida->usuario_partida->nome }} para jogar {{ $convite->convite_partida->nome }}.</a></li>
+                            @endforeach
+                        @endif
                     <ul>
                 </div>
             </div>

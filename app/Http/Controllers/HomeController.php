@@ -25,10 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $convites = \App\Convite::where('id_usuario','=',Auth::user()->id)->whereNull('status')->get();
+        
         $jogador = \App\Jogador::where('id_usuario','=',Auth::user()->id)->get();
         if($jogador->isEmpty()){
             return view('jogador.novo');
         }
-        return view('home');
+        return view('home',compact('convites'));
+    }
+
+    public function convite()
+    {
+
     }
 }
