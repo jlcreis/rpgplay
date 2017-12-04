@@ -7,7 +7,9 @@
             <h1 class="display-4">{{ $partida->nome }}</h1>
         </div>
         <div class="col-md-6">
-            <a class="btn btn-success btn-align-right" href="{{ route('jogar',$partida->id) }}">Iniciar partida</a>
+            <a class="btn btn-success btn-align-right" href="{{ route('jogar',$partida->id) }}">
+                {{ $partida->status == 1 ? 'Iniciar partida' : 'Continuar partida' }}
+            </a>
         </div>
     </div>
     <ul class="nav nav-tabs">

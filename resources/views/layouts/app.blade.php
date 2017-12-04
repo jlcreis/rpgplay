@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<!--base href=”http://www.joaolcreis.96.lt/rpgplay/public” target=”_top” /-->
+	<base href=”http:/http://127.0.0.1:8000/public” target=”_top” />
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -13,6 +14,7 @@
 
 	<!-- Styles -->
 	<link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('jquery/jquery-ui.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 </head>

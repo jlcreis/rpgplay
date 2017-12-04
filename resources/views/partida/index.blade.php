@@ -44,7 +44,7 @@
             @endforeach
         </ul>
     @endif
-    @if($convites)
+    @isset($convites)
         <ul class="list-group">
             @foreach($convites as $convite)
             <li class="list-group-item">
@@ -58,7 +58,7 @@
             </li>
             @endforeach
         </ul>
-    @endif
+    @endisset
 </div>
 
 @endsection

@@ -16,6 +16,7 @@ class CreatePersonagensPartidaTable extends Migration
         Schema::create('personagens_partida', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_partida')->unsigned();
+            $table->integer('id_usuario')->unsigned();
             $table->integer('id_personagem')->unsigned();
             $table->integer('pontos_forca');
             $table->integer('pontos_destreza');
@@ -27,6 +28,7 @@ class CreatePersonagensPartidaTable extends Migration
             $table->integer('tipo_personagem');
 
             $table->foreign('id_partida')->references('id')->on('partidas');
+            $table->foreign('id_usuario')->references('id')->on('users');
             $table->foreign('id_personagem')->references('id')->on('personagens');
         });
     }

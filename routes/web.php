@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -53,4 +53,7 @@ Route::group(['prefix' => 'personagens'], function () {
 
 Route::group(['prefix' => 'jogar'], function () {
     Route::get('/{id_partida}', 'JogarController@index')->name('jogar');
+    Route::post('/{id_partida}/acao', 'JogarController@acao')->name('acao');
+    Route::post('/historicoAcao', 'JogarController@historicoAcoes')->name('historicoAcoes');
+    Route::post('/statusPartida', 'JogarController@statusPartida')->name('statusPartida');
 });

@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Convite','id_usuario');
     }
+
+    public function personagem_partida()
+    {
+        return $this->hasOne('App\PersonagemPartida','id_usuario');
+    }
 }

@@ -18,6 +18,7 @@ class CreateAcoesPartidaTable extends Migration
             $table->integer('id_partida')->unsigned();
             $table->string('personagem',50);
             $table->string('acao',200);
+            $table->string('resultado',200)->nullable();
             $table->timestamps();
 
             $table->foreign('id_partida')->references('id')->on('partidas');

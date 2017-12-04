@@ -5,10 +5,24 @@
     margin: 0 auto;
 }
 
+.imgCardPersonagemPartida {
+    max-width:100px;
+    height:150px;
+    width: auto;
+    margin: 0 auto;
+}
+
 .btn-align-right{
     float:right;
 }
 
 .textSmall{
     font-size: 12px;
+}
+
+/*** tela de jogo ***/
+
+.scroll-acao {
+    height: 80vh;
+    overflow-y: scroll;
 }

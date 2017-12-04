@@ -10,6 +10,7 @@ class PersonagemPartida extends Model
 
     protected $fillable = [
         'id_partida',
+        'id_usuario',
         'id_personagem',
         'pontos_forca',
         'pontos_destreza',

@@ -9,8 +9,9 @@ class AcaoPartida extends Model
     protected $table = 'acoes_partida';
     protected $fillable = [
         'id_partida',
-        'jogador',
+        'personagem',
         'acao',
+        'resultado',
     ];
     
     public function status_partida()

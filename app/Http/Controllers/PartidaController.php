@@ -190,6 +190,7 @@ class PartidaController extends Controller
 
         $personagem_partida = new PersonagemPartida();
         $personagem_partida->id_partida = $id_partida;
+        $personagem_partida->id_usuario = Auth::user()->id;
         $personagem_partida->id_personagem = $personagem->id;
         $personagem_partida->pontos_forca = $personagem->pontos_forca;
         $personagem_partida->pontos_destreza = $personagem->pontos_destreza;
