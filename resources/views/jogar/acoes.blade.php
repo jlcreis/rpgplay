@@ -1,3 +1,4 @@
+<!-- nao estão sendo usado -->
 
 @if($acoesPartida)
     @foreach($acoesPartida as $acaoPartida)

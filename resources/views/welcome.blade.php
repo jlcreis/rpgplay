@@ -53,22 +53,6 @@
                                         @endif
                                     </div>
                                 </div>
-                                <!--div class="form-group row">
-                                    <div class="col-md-12">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Lembrar identificação do usuário
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div-->
-                                <!--div class="form-group row">
-                                    <div class="col-md-12">
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            Esqueceu seu usuário ou senha?
-                                        </a>
-                                    </div>
-                                </div-->
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <button type="submit" class="btn btn-block btn-success">
