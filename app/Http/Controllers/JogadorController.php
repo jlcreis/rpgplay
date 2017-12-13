@@ -10,20 +10,23 @@ use Auth;
 
 class JogadorController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
+
         $this->middleware('auth');
+
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+
         $jogadores = \App\Jogador::all();
         
         return view('jogador.index', compact('jogadores'));
+   
     }
 
     /**
@@ -31,8 +34,8 @@ class JogadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, Jogador $jogador)
-    {       
+    public function create(Request $request, Jogador $jogador) {
+
         $validator = Validator::make($request->all(), $jogador->rules, $jogador->mensagens_error);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();
@@ -45,17 +48,7 @@ class JogadorController extends Controller
         $jogador->save();
 
         return redirect()->route('home')->with('msg_ok','Tarefa realizada com sucesso!');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    
     }
 
     /**
@@ -64,24 +57,15 @@ class JogadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
+
         $jogador = \App\Jogador::find($id);
         if(empty($jogador)){
             return view('jogador.novo');
         }
-        return view('jogador.jogador', compact('jogador'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('jogador.jogador', compact('jogador'));
+    
     }
 
     /**
@@ -91,8 +75,8 @@ class JogadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jogador $jogador, $id)
-    {
+    public function update(Request $request, Jogador $jogador, $id) {
+
         if(isset($request->avatar)){
             $validator = Validator::make($request->all(), [
                 'avatar'=>'image|max:1000|mimes:jpeg,bmp,png',
@@ -150,8 +134,8 @@ class JogadorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
+
         $jogador = \App\Jogador::find($id);
         $avatar = $jogador->avatar;
         $id_usuario = $jogador->id_usuario;
@@ -166,8 +150,8 @@ class JogadorController extends Controller
      * Move imagem para repositório do servidor.
      *
      */
-    public function moveAvatar($avatar)
-    {
+    public function moveAvatar($avatar) {
+
         $destinationPath = 'img/jogador';
         $fileName = md5(uniqid(time())).'.jpg';
         $avatar->move($destinationPath, $fileName);
@@ -179,20 +163,22 @@ class JogadorController extends Controller
      * Remove imagem do repositório do servidor.
      *
      */
-    public function removeAvatar($fileName)
-    {
+    public function removeAvatar($fileName) {
+
         unlink("img/jogador/".$fileName);
+
     }
 
     /**
      * Pesquisa jogador autocomplete
      * 
      */
-    public function listaJogadores(Request $request)
-    {
+    public function listaJogadores(Request $request) {
+
         $term = $request->term;
         $jogador = \App\User::select('nome as label','id as value')->where('nome','like','%'.$term.'%')->get();
 
         return response()->json($jogador);
+        
     }
 }

@@ -10,17 +10,19 @@ use Auth;
 
 class PersonagemController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
+
         $this->middleware('auth');
+
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+
         if(Auth::user()->id == 1){
             $personagens = \App\Personagem::all();
         }
@@ -36,9 +38,10 @@ class PersonagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
+
         return view('personagem.novo');
+
     }
 
     /**
@@ -47,8 +50,8 @@ class PersonagemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Personagem $personagem)
-    {
+    public function store(Request $request, Personagem $personagem) {
+
         $validator = Validator::make($request->all(), $personagem->rules, $personagem->mensagens_error);
         if($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();
@@ -74,29 +77,20 @@ class PersonagemController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
+
         $personagem = \App\Personagem::find($id);
+
         return view('personagem.edita', compact('personagem'));
     }
 
-    public function editAvatar($avatar){
+    public function editAvatar($avatar) {
+
         return view('personagem.editaAvatar',compact('avatar'));
     }
 
@@ -107,8 +101,8 @@ class PersonagemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
+
         $validator = Validator::make($request->all(), [
             'nome'=>'required|string|min:3|max:50',
             'pontos_forca'=>'required',
@@ -136,8 +130,9 @@ class PersonagemController extends Controller
 
         return redirect()->route('personagens');
     }
-    public function updateAvatar(Request $request, $avatar)
-    {
+
+    public function updateAvatar(Request $request, $avatar) {
+
         $validator = Validator::make($request->all(), [
             'avatar'=>'image|max:1000|mimes:jpeg,bmp,png',
         ]);
@@ -156,8 +151,8 @@ class PersonagemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
+
         $personagem = \App\Personagem::find($id);
         $avatar = $personagem->avatar;
         $this->removeAvatar($avatar);
@@ -170,8 +165,8 @@ class PersonagemController extends Controller
      * Move imagem para repositório do servidor.
      *
      */
-    public function moveAvatar($avatar)
-    {
+    public function moveAvatar($avatar) {
+
         //$destinationPath = 'http://www.joaolcreis.96.lt/rpgplay/public/img/personagem';
         $destinationPath = 'http:/http://127.0.0.1:8000/public/img/personagem';
         $fileName = md5(uniqid(time())).'.jpg';
@@ -184,8 +179,8 @@ class PersonagemController extends Controller
      * Remove imagem do repositório do servidor.
      *
      */
-    public function removeAvatar($fileName)
-    {
+    public function removeAvatar($fileName) {
+        
         //unlink("http://www.joaolcreis.96.lt/rpgplay/public/img/personagem/".$fileName);
         unlink("http:/http://127.0.0.1:8000/public/img/personagem/".$fileName);
     }

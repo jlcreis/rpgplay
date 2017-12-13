@@ -13,9 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
+
         $this->middleware('auth');
+
     }
 
     /**
@@ -23,19 +24,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+
         $convites = \App\Convite::where('id_usuario','=',Auth::user()->id)->whereNull('status')->get();
         
         $jogador = \App\Jogador::where('id_usuario','=',Auth::user()->id)->get();
         if($jogador->isEmpty()){
             return view('jogador.novo');
         }
+
         return view('home',compact('convites'));
+   
     }
 
-    public function convite()
-    {
-
-    }
 }
