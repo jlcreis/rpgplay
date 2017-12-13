@@ -54,25 +54,24 @@
                         <div class="col-md-4 col-lg-3">
                             <div class="card">
                                 <div class="card-block">
-                                <ul class="list-unstyled">
-                                    <li><strong>{{$personagem->personagem->nome}}</strong>
-                                    @if ($personagem->personagem->jogador->user->id == Auth::user()->id)
-                                    <button type="button" class="close text-right" data-toggle="modal" data-target="#removerPersonagem_{{$personagem->id}}Modal" arial-label="close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    @endif
-                                    </li>
-                                    @if ($personagem->personagem->jogador->user->id != $partida->id_usuario)
-                                    <li><small>{{ $personagem->personagem->jogador->user->nome}}</small></li>
-                                    @else
-                                     <li><small>Personagem secundário</small></li>   
-                                    @endif
-                                </ul>
-                                <img class="imgPersonagem" src="/img/personagem/{{$personagem->personagem->avatar}}" alt="avatar">
+                                    <ul class="list-unstyled">
+                                        <li><strong>{{$personagem->personagem->nome}}</strong>
+                                        @if ($personagem->personagem->jogador->user->id == Auth::user()->id)
+                                        <button type="button" class="close text-right" data-toggle="modal" data-target="#removerPersonagem_{{$personagem->id}}Modal" arial-label="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        @endif
+                                        </li>
+                                        @if ($personagem->personagem->jogador->user->id != $partida->id_usuario)
+                                        <li><small>{{ $personagem->personagem->jogador->user->nome}}</small></li>
+                                        @else
+                                        <li><small>Personagem secundário</small></li>   
+                                        @endif
+                                    </ul>
+                                    <img class="imgPersonagem" src="/img/personagem/{{$personagem->personagem->avatar}}" alt="avatar">
                                 </div>
                             </div>
                         </div>
-
                         <div class="modal fade" id="removerPersonagem_{{$personagem->id}}Modal" tabindex="-1" role="dialog" aria-labelledby="removerPersonagemModal" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <form class="form-horizontal" method="POST" action="{{ route('deletarPersonagemSecundario',$personagem->id) }}">
@@ -91,7 +90,6 @@
                                 </form>
                             </div>
                         </div>
-
                     @endforeach
                     </div>
                     @endif

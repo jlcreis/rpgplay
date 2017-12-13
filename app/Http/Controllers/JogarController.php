@@ -15,9 +15,10 @@ class JogarController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
+        
         $this->middleware('auth');
+
     }
 
     /**
@@ -25,8 +26,8 @@ class JogarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_partida)
-    {
+    public function index($id_partida) {
+
         $partida = \App\Partida::find($id_partida);
         if ($partida->status == 1) {
             \App\Partida::find($id_partida)->update(['status'=>2]);
@@ -40,6 +41,7 @@ class JogarController extends Controller
     }
 
     public function statusPartida(Request $request) {
+        
         // partida iniciada
         if ($request->status == 2) {
             \App\Partida::find($request->id_partida)->update(['status'=>2]);
@@ -60,12 +62,14 @@ class JogarController extends Controller
 
     public function acao($id_partida, Request $request) {
         
+        $partida = \App\Partida::find($id_partida);
         $acaoPartida = new AcaoPartida();
+        $personagemPartida = \App\PersonagemPartida::where([['id_partida',$id_partida],['id_usuario',Auth::user()->id]])->get();
         $acaoPartida->id_partida = $id_partida;
-        if (Auth::user()->partida->id == $id_partida) {
+        if (Auth::user()->id == $partida->id_usuario) {
             $acaoPartida->personagem = Auth::user()->nome;
         } else {
-            $acaoPartida->personagem = Auth::user()->personagem_partida->personagem->nome;
+            $acaoPartida->personagem = Auth::user()->nome;
         }
         $acaoPartida->acao = $request->acao;
         $acaoPartida->resultado = $request->resultado;

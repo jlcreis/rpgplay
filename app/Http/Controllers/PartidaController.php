@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Partida;
 use App\PersonagemPartida;
 use App\Convite;
@@ -61,7 +62,7 @@ class PartidaController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         
-        if(count($request->idJogador) < 3){
+        if(count($request->idJogador) < 1){
             return redirect()->back()->with('msg','número de jogadores insuficiente.')->withInput();
         }
         
@@ -73,11 +74,15 @@ class PartidaController extends Controller
         $partida->status = 1;
         $partida->save();
 
-        foreach($request->idJogador as $idJogador){
-            $convite = new Convite();
-            $convite->id_partida = $partida->id;
-            $convite->id_usuario = $idJogador;
-            $convite->save();
+        $idJogadores = array_unique($request->idJogador);
+
+        foreach($idJogadores as $idJogador){
+            if ($idJogador != Auth::user()->id) {
+                $convite = new Convite();
+                $convite->id_partida = $partida->id;
+                $convite->id_usuario = $idJogador;
+                $convite->save();
+            }
         }
         
         return redirect()->route('partidas');
@@ -137,9 +142,14 @@ class PartidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-
-        //
+    public function destroy($id_partida) {
+        
+        DB::table('convites')->where('id_partida', $id_partida)->delete();
+        DB::table('personagens_partida')->where('id_partida', $id_partida)->delete();
+        DB::table('acoes_partida')->where('id_partida', $id_partida)->delete();
+        \App\Partida::destroy($id_partida);
+        
+        return back();
 
     }
 
@@ -163,7 +173,7 @@ class PartidaController extends Controller
         $partida = \App\Partida::find($id_partida);
         $personagens = \App\PersonagemPartida::where('id_partida','=',$id_partida)->get();
         foreach ($personagens as $p) {
-            if ($p->personagem->jogador->user->id != $partida->id_usuario) {
+            if ($p->personagem->jogador->user->id == Auth::user()->id) {
                 \App\PersonagemPartida::destroy($p->id);
             }
         }
@@ -226,9 +236,10 @@ class PartidaController extends Controller
     /**
      * 
      */
-    public function deletarPersonagemPartida($id) {
+    public function deletarPersonagemPartida($id_partida) {
 
-        \App\PersonagemPartida::destroy($id);
+        \App\PersonagemPartida::destroy($id_partida);
+        $personagens = \App\Personagem::where('id_jogador',Auth::user()->jogador->id)->get();
 
         return back();
 

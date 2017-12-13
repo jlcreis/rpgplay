@@ -50,7 +50,12 @@
                 <div class="card">
                     <div class="card-block">
                         <div class="form-group">
-                            <input class="form-control" type="text" id="jogador" placeholder="Pesquisar jogador">
+                            <div class="input-group">
+                                <input class="form-control" type="text" id="jogador" placeholder="Pesquisar jogador">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary" type="button" onclick="removeConvite()">limpar lista</button>
+                                </span>
+                            </div>
                             @if (session('msg'))
                                 <span class="help-block">
                                     <strong>{{ session('msg') }}</strong>
@@ -67,6 +72,7 @@
                 <a href="{{ route('partidas')}}" class="btn btn-secondary">Cancelar</a>         
             
             </form>
+                                    
         </div>
     </div>
 
@@ -90,6 +96,7 @@
                     inputJogador.setAttribute("id", "idJogador[]");
                     inputJogador.setAttribute("value", ui.item.value);
                 var labelJogador = document.createElement("li");
+                    labelJogador.setAttribute("id", "jogador");
                 var textnode = document.createTextNode(ui.item.label);
                     labelJogador.appendChild(textnode);
                 document.getElementById("listaJogadores").appendChild (labelJogador);
@@ -100,6 +107,13 @@
         });
     }
     $("#jogador").click(pesquisa);
+
+    function removeConvite(){
+        var elemento = document.getElementById("listaJogadores");
+            while (elemento.firstChild) {
+            elemento.removeChild(elemento.firstChild);
+            }
+    }
     
 </script>
 @endsection

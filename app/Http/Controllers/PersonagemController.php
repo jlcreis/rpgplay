@@ -172,7 +172,8 @@ class PersonagemController extends Controller
      */
     public function moveAvatar($avatar)
     {
-        $destinationPath = 'img/personagem';
+        //$destinationPath = 'http://www.joaolcreis.96.lt/rpgplay/public/img/personagem';
+        $destinationPath = 'http:/http://127.0.0.1:8000/public/img/personagem';
         $fileName = md5(uniqid(time())).'.jpg';
         $avatar->move($destinationPath, $fileName);
 
@@ -185,6 +186,7 @@ class PersonagemController extends Controller
      */
     public function removeAvatar($fileName)
     {
-        unlink("img/personagem/".$fileName);
+        //unlink("http://www.joaolcreis.96.lt/rpgplay/public/img/personagem/".$fileName);
+        unlink("http:/http://127.0.0.1:8000/public/img/personagem/".$fileName);
     }
 }

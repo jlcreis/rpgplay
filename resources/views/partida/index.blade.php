@@ -28,34 +28,57 @@
             <a class="btn btn-primary btn-align-right" href="{{ route('criarPartida') }}">Novo</a>
         </div>
     </div>
-    
     @if($partidas)
         <ul class="list-group">
-            @foreach($partidas as $partida)
-            <li class="list-group-item">
+            @foreach($partidas as $partida) <!-- partidas criadas -->
+            <div class="card">
+                <button type="button" class="close text-right" data-toggle="modal" data-target="#removerPartida_{{$partida->id}}Modal" arial-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <a href="{{ route('configurarPartida', $partida->id) }}" class="list-group-item-action">
-                    <p>Nome: <strong>{{$partida->nome}}</strong></p>
-                    <p>Data da partida: {{date('d/m/Y', strtotime ($partida->data))}}</p>
-                    <p>Hora da partida: {{date('H:m', strtotime ($partida->hora))}}</p>
-                    <p>Criador: {{ $partida->usuario_partida->nome }}</p>
-                    <p>Status: {{ $partida->status_partida->status }}</p>
+                    <div class="card-block">
+                        <h4 class="card-title">{{$partida->nome}}</h4>
+                        <p><strong>Dia: </strong>{{date('d/m/Y', strtotime ($partida->data))}}, 
+                        <strong>Horário: </strong>{{date('H:m', strtotime ($partida->hora))}},
+                        <strong>Status: </strong>{{ $partida->status_partida->status }}</p>
+                    </div>
                 </a>
-            </li>
+            </div>
+            <div class="modal fade" id="removerPartida_{{$partida->id}}Modal" tabindex="-1" role="dialog" aria-labelledby="removerPersonagemModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form class="form-horizontal" method="POST" action="{{ route('deletarPartida',$partida->id) }}">
+                        <div class="modal-content">
+                        <div class="modal-body">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <p>Desejar excluir a partida <strong>{{ $partida->nome }}</strong> ?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                            <button type="submit" class="btn btn-danger">Sim</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             @endforeach
         </ul>
     @endif
     @isset($convites)
+    <h3 class="display-6">Meus convites</h3>
         <ul class="list-group">
-            @foreach($convites as $convite)
-            <li class="list-group-item">
+            @foreach($convites as $convite) <!-- partidas convidadas -->
+            <div class="card">
                 <a href="{{ route('configurarPartida', $convite->convite_partida->id) }}" class="list-group-item-action">
-                    <p>Nome: <strong>{{$convite->convite_partida->nome}}</strong></p>
-                    <p>Data da partida: {{date('d/m/Y', strtotime ($convite->convite_partida->data))}}</p>
-                    <p>Hora da partida: {{date('H:m', strtotime ($convite->convite_partida->hora))}}</p>
-                    <p>Criador: {{ $convite->convite_partida->usuario_partida->nome }}</p>
-                    <p>Status: {{ $convite->convite_partida->status_partida->status }}</p>
+            <div class="card-block">
+                <h4 class="card-title">{{$convite->convite_partida->nome}}</h4>
+                <p><strong>Dia: </strong>{{date('d/m/Y', strtotime ($convite->convite_partida->data))}}, 
+                <strong>Horário: </strong>{{date('H:m', strtotime ($convite->convite_partida->hora))}},
+                <strong>Criador: </strong>{{ $convite->convite_partida->usuario_partida->nome }},
+                <strong>Status: </strong>{{ $convite->convite_partida->status_partida->status }}</p>
+            </div>
                 </a>
-            </li>
+            </div>
             @endforeach
         </ul>
     @endisset

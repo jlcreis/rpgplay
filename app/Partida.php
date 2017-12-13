@@ -17,7 +17,7 @@ class Partida extends Model
     
     public $rules = [
         'nome'=>'required|min:3',
-        'data'=>'required|date|date_format:"Y-m-d"|date|after_or_equal:now',
+        'data'=>'required|date|date_format:"Y-m-d"|date|after_or_equal:today',
         'hora'=>'required|date_format:"H:i"',
         'status'=>'requered|numeric',
     ];

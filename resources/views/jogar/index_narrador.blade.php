@@ -188,6 +188,9 @@
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             },
             dataType:'JSON',
+            error: function() {
+             alert("Servidor não está respondendo.");
+           }
         });
     }
 

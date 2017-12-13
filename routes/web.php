@@ -31,6 +31,7 @@ Route::group(['prefix' => 'partidas'], function () {
     Route::get('/', 'PartidaController@index')->name('partidas');
     Route::get('/create', 'PartidaController@create')->name('criarPartida');
     Route::post('/gravar', 'PartidaController@store')->name('gravarPartida');
+    Route::delete('/partida/{id}', 'PartidaController@destroy')->name('deletarPartida');
     Route::get('/pesquisa_jogador', 'JogadorController@listaJogadores')->name('listaJogadores');
     Route::get('/{id}/configuração','PartidaController@show')->name('configurarPartida');
     Route::get('/{id_partida}/aceitar_convite','PartidaController@aceitarConvite')->name('aceitarConvite');
